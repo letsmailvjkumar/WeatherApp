@@ -4,7 +4,7 @@ import Location from './components/Location'
 import City from './components/City'
 const App = () => {
   return (
-    <div>
+    <div className=' overflow-x-hidden'>
     <Location />
     </div>
   )

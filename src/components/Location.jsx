@@ -33,7 +33,7 @@ const Location = () => {
           <img src={menu} alt="menu" className="w-5 menu"/>
         </div>
       </div>
-      <div className="max-[480px]:mt-0 max-[480px]:flex-col max-[480px]:items-start flex justify-between mt-32 items-center">
+      <div className="max-[480px]:w-96 max-[480px]:mt-0 max-[480px]:flex-col max-[480px]:items-start flex justify-between mt-32 items-center">
         <div className="w-[50%] left-section ">
           <div className="text-4xl">
           <p className="max-[480px]:hidden">Various weather conditions throughout the entire 24/7 timeframe.</p>  
@@ -44,27 +44,27 @@ const Location = () => {
             Dive into real-time weather data, stay ahead of storms, and bask in
             the precision of our atmospheric insights.
           </div>
-          <div className="max-[480px]:m-auto w-full mt-5 text-black relative">
+          <div className="flex w-full mt-5 text-black relative">
             <img
               src={search}
               alt="search-icon"
-              className="w-4 absolute top-3 left-2 "
+              className="w-4 absolute top-3 left-2 max-[480px]:ms-5"
             />
             <input
               type="text"
               value={searchTerm}
               onChange={handleInputChange}
               placeholder="Enter your city name"
-              className="w-[31em] p-[0.5rem] ps-8 outline-none max-[480px]:w-auto "
+              className="w-[31em] p-[0.5rem] ps-8 outline-none max-[480px]:ms-5"
             />
             <button
               onClick={handleClick}
-              className="bg-blue-700 w-32 h-10 text-white font-medium"
+              className=" bg-blue-700 h-10 text-white font-medium w-[10rem] p-2"
             >
-              Get Update
+              search
             </button>
           </div>
-          <div className="mt-3">Best way to know your city weather *</div>
+          <div className="mt-3 max-[480px]:ms-5">Best way to know your city weather *</div>
         </div>
         <div className="right-section">
         {
