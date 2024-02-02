@@ -1,5 +1,5 @@
 #root {
-  margin: 0 auto;
+  margin: 0;
   font-family: 'Roboto', sans-serif;
   background-color: rgb(15,23,42);
   color: white;
@@ -9,10 +9,4 @@ body{
   background-color: rgb(15,23,42);
 }
 
-@media (max-width: 420px) {
-  body{
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  }
-}
+

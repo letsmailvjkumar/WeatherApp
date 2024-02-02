@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { logo, menu, search } from "../assets/images";
 import CurrentWeather from "./CurrentWeather";
 import Footer from "./Footer";
-
+import '../styles/Location.css'
 const Location = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [showCity, setShowCity] = useState(false);
@@ -16,33 +16,35 @@ const Location = () => {
   };
  
   return (
-    <div className="container">
-      <div className="flex items-center justify-between">
+    <div className="max-[480px]:mx-3 container">
+      <div className="flex items-center justify-between w-full max-[480px]:w-96">
         <div className="flex items-center">
           <img src={logo} className="bg-transparent w-14 grayscale invert" />
           <div className="text-lg font-semibold">WeatherWise</div>
         </div>
-        <div className="tablet:flex gap-5 links mobile:hidden ">
+        <div className="mobile:hidden lg:flex gap-5 links ">
           <div className="cursor-pointer hover:underline">Home</div>
           <div className="cursor-pointer hover:underline">Map</div>
           <div className="cursor-pointer hover:underline">News</div>
           <div className="cursor-pointer hover:underline">Contact</div>
           <div className="cursor-pointer bg-blue-700 ps-2 pe-2">Get App</div>
         </div>
-        <div className="mobile:grayscale invert tablet:hidden">
-          <img src={menu} alt="menu" className="w-5"/>
+        <div className="lg:hidden grayscale invert menu">
+          <img src={menu} alt="menu" className="w-5 menu"/>
         </div>
       </div>
-      <div className="flex justify-between mt-32 items-center">
+      <div className="max-[480px]:mt-0 max-[480px]:flex-col max-[480px]:items-start flex justify-between mt-32 items-center">
         <div className="w-[50%] left-section ">
-          <div className="mobile:hidden text-4xl ">
-            Various weather conditions throughout the entire 24/7 timeframe.
+          <div className="text-4xl">
+          <p className="max-[480px]:hidden">Various weather conditions throughout the entire 24/7 timeframe.</p>  
+          
+
           </div>
-          <div className="mt-5">
+          <div className="mt-5 max-[480px]:hidden ">
             Dive into real-time weather data, stay ahead of storms, and bask in
             the precision of our atmospheric insights.
           </div>
-          <div className="w-full mt-5 text-black relative">
+          <div className="max-[480px]:m-auto w-full mt-5 text-black relative">
             <img
               src={search}
               alt="search-icon"
@@ -53,7 +55,7 @@ const Location = () => {
               value={searchTerm}
               onChange={handleInputChange}
               placeholder="Enter your city name"
-              className="w-[31em] p-[0.5rem] ps-8 outline-none "
+              className="w-[31em] p-[0.5rem] ps-8 outline-none max-[480px]:w-auto "
             />
             <button
               onClick={handleClick}

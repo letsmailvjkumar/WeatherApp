@@ -89,7 +89,7 @@ const CurrentWeather = ({ searchTerm }) => {
 
   return (
     <div className="">
-      <div className="flex items-center">
+      <div className="max-[480px]:flex-col flex items-center filter drop-shadow-lg">
         <div className="font-semibold">{searchTerm.toUpperCase()}</div>
         <div>
           <img src={getWeatherImage(firstItem.weather[0].main)} alt="weather" />
@@ -103,14 +103,14 @@ const CurrentWeather = ({ searchTerm }) => {
             {showCelsius ? "°C" : "°F"}
           </p>
         </div>
-        <div className="ms-3 border p-1">
-          <button onClick={toggleTemperatureUnit}>
+        <div className="ms-3 border p-1 max-[480px]:mt-3">
+          <button onClick={toggleTemperatureUnit} >
             {showCelsius ? "Switch to Fahrenheit" : "Switch to Celsius"}
           </button>
         </div>
       </div>
-      <div>
-        <div>
+      <div className="max-[480px]:flex max-[480px]:mt-5">
+        <div >
           <p>Expect {firstItem.weather[0].main}</p>
         </div>
         <div>
