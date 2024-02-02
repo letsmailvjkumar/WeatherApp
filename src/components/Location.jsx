@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { logo, search, thunderStorm } from "../assets/images";
-import City from "./City";
+import { logo, menu, search } from "../assets/images";
+import CurrentWeather from "./CurrentWeather";
+import Footer from "./Footer";
 
 const Location = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -13,25 +14,28 @@ const Location = () => {
     setSearchTerm(e.target.value);
     setShowCity(false);
   };
-
+ 
   return (
     <div className="container">
-      <div className="flex justify-between items-center navbar">
+      <div className="flex items-center justify-between">
         <div className="flex items-center">
           <img src={logo} className="bg-transparent w-14 grayscale invert" />
           <div className="text-lg font-semibold">WeatherWise</div>
         </div>
-        <div className="flex gap-5 links">
+        <div className="tablet:flex gap-5 links mobile:hidden ">
           <div className="cursor-pointer hover:underline">Home</div>
           <div className="cursor-pointer hover:underline">Map</div>
           <div className="cursor-pointer hover:underline">News</div>
           <div className="cursor-pointer hover:underline">Contact</div>
           <div className="cursor-pointer bg-blue-700 ps-2 pe-2">Get App</div>
         </div>
+        <div className="mobile:grayscale invert tablet:hidden">
+          <img src={menu} alt="menu" className="w-5"/>
+        </div>
       </div>
-      <div className="flex mt-20">
-        <div className="w-[50%] left-section">
-          <div className="text-4xl ">
+      <div className="flex justify-between mt-32 items-center">
+        <div className="w-[50%] left-section ">
+          <div className="mobile:hidden text-4xl ">
             Various weather conditions throughout the entire 24/7 timeframe.
           </div>
           <div className="mt-5">
@@ -60,12 +64,13 @@ const Location = () => {
           </div>
           <div className="mt-3">Best way to know your city weather *</div>
         </div>
-        <div>
+        <div className="right-section">
         {
-            showCity && <City searchTerm={searchTerm} />
+             showCity &&  <CurrentWeather searchTerm={searchTerm}  />
         }
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

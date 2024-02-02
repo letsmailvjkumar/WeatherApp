@@ -1,51 +1,82 @@
-import React, { useState, useEffect} from 'react'
-import axios from 'axios'
-const City = ({searchTerm}) => {
-    const [currentTemp, setCurrentTemp] = useState("");
-    const [mintemp, setMinTemp] = useState("");
-    const [maxtemp, setMaxTemp] = useState("");
-    const [humidity, setHumidity] = useState("");
-    const [speed, setSpeed] = useState("");
-    const [data, setData] = useState([])
+import React, { useState, useEffect } from "react";
+import {
+  clouds,
+  sunny,
+  rain,
+  lightrain,
+  heavyrain,
+  clearsky,
+} from "../assets/images";
 
-    useEffect(() => {
-        async function getWeather() {
-          try {
-            const response = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${searchTerm}&appid=ffc8fff83968f8f16f6d64b419a54728`);
-            setData(response.data.list);
-          } catch (error) {
-            console.error(error);
-          }
-        }
-    
-        getWeather();
-      }, [searchTerm]);
+const City = ({ data, showCelsius }) => {
+  const [selectedItem, setSelectedItem] = useState(0);
 
-      // Filter data for 12 PM (1200 hours)
-    const afternoonData = data.filter(item => {
-        return item.dt_txt.includes('12:00:00');
-    });
 
-    function fahrenheitToCelsius(fahrenheit) {
-        const celsius = (fahrenheit - 32) * 5 / 9;
-        return celsius;
-      }
+  // Filter data for 12 PM (1200 hours)
+  const afternoonData = data.filter((item) => {
+    return item.dt_txt.includes("12:00:00");
+  });
 
-    return (
-    <div>
+  function fahrenheitToCelsius(fahrenheit) {
+    const celsius = ((fahrenheit - 32) * 5) / 9;
+    return celsius.toFixed(2);
+  }
+
+  
+
+  const getDayOfWeek = (dateString) => {
+    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const date = new Date(dateString);
+    return days[date.getDay()];
+  };
+
+  const getWeatherImage = (description) => {
+    const formattedDescription = description.toLowerCase().replace(/\s/g, "");
+    const weatherImages = {
+      clouds,
+      sunny,
+      rain,
+      lightrain,
+      heavyrain,
+      clearsky,
+    };
+    return weatherImages[formattedDescription] || sunny;
+  };
+
+  const handleItemClick = (index) => {
+    setSelectedItem(index);
+  };
+
+  return (
+    <div className="flex mt-3">
       {afternoonData.map((item, index) => (
-        <div key={index}>
-          <p>Current Temperature: {item.main.temp}</p>
-          <p>Min Temperature: {item.main.temp_min} | Max Temperature: {item.main.temp_max}</p>
-          <p>Humidity: {item.main.humidity}</p>
-          <p>Wind Speed: {item.wind.speed}</p>
-          <p>Description: {item.weather[0].main}</p>
-          <p></p>
-          <hr />
+        <div
+          key={index}
+          className={`p-1 flex flex-col items-center  ${
+            index === selectedItem ? "bg-slate-600" : ""
+          }`}
+          onClick={() => handleItemClick(index)}
+        >
+          <div>
+            <p>{getDayOfWeek(item.dt_txt)}</p>
+          </div>
+          <div>
+            <img src={getWeatherImage(item.weather[0].main)} alt="weather-image" />
+          </div>
+          <div>
+          <p>
+          {showCelsius
+            ? fahrenheitToCelsius(item.main.temp_max)
+            : item.main.temp_max}° |{" "}
+          {showCelsius
+            ? fahrenheitToCelsius(item.main.temp_min)
+            : item.main.temp_min}°
+        </p>
+          </div>
         </div>
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default City
+export default City;
